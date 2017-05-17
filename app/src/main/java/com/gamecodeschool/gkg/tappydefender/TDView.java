@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -28,7 +29,7 @@ public class TDView extends SurfaceView implements Runnable
     private long timeTaken;
     private long timeStarted;
     private long fastestTime;
-    private boolean gameEnded;
+    private volatile boolean gameEnded;
 
     private int screenX;
     private int screenY;
@@ -90,7 +91,7 @@ public class TDView extends SurfaceView implements Runnable
     }
 
     private void update(){
-
+        Log.i("== INITIAL UPDATE ==", "gameEnded? =="+String.valueOf(gameEnded)+", Shield length=="+String.valueOf(player.getShieldStrength()));
         // If images in excess of 100 pixels wide then increase -100 accordingly
         for(EnemyShip es : enemyList){
             if(CollisionChecker.isCollisionDetected(player.getBitmap(),player.getX(),player.getY(), es.getBitmap(),es.getX(),es.getY())){
@@ -104,6 +105,7 @@ public class TDView extends SurfaceView implements Runnable
             gameEnded = true;
         }
 
+        Log.i("== SECOND UPDATE ==", "gameEnded? =="+String.valueOf(gameEnded)+", Shield length=="+String.valueOf(player.getShieldStrength()));
         // Update the player
         player.update();
 
