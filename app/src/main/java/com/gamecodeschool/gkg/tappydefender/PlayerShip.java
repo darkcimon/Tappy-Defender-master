@@ -27,7 +27,7 @@ public class PlayerShip {
 
     private final int INIT_X = 50;
     private final int INIT_Y = 50;
-    private volatile int shieldStrength = 2;
+    private int shieldStrength = 2;
 
     // A hit box for collision detection
     private Rect hitBox;
