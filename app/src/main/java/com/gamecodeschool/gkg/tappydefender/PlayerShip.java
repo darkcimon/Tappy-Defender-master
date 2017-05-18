@@ -25,12 +25,11 @@ public class PlayerShip {
     private int speed = 0;
     private boolean boosting;
 
+    private boolean invincible = false;
+
     private final int INIT_X = 50;
     private final int INIT_Y = 50;
     private int shieldStrength = 2;
-
-    // A hit box for collision detection
-    private Rect hitBox;
 
     public PlayerShip(Context context, int screenX, int screenY){
         x = INIT_X;
@@ -41,8 +40,6 @@ public class PlayerShip {
         maxY = screenY - bitmap.getHeight();
         minY = 0;
 
-        // Initialize the hit box
-        hitBox = new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
     }
 
     public void update() {
@@ -77,16 +74,15 @@ public class PlayerShip {
             y = maxY;
         }
 
-        // Refresh the hit box location
-        hitBox.left = x;
-        hitBox.top = y;
-//        hitBox.right = x + bitmap.getWidth();
-//        hitBox.bottom = y + bitmap.getHeight();
     }
 
     //Getters
     public Bitmap getBitmap() {
         return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     public int getX() {
@@ -107,12 +103,12 @@ public class PlayerShip {
         return speed;
     }
 
-    public Rect getHitBox() {
-        return hitBox;
-    }
-
     public int getShieldStrength() {
         return shieldStrength;
+    }
+
+    public void addShieldStrength() {
+        this.shieldStrength++;
     }
 
     public void setBoosting() {
@@ -124,6 +120,12 @@ public class PlayerShip {
     }
 
     public void reduceShieldStrength() {
-        shieldStrength--;
+        if(!invincible){
+            shieldStrength--;
+        }
+    }
+
+    public void setInvincible(boolean invincible) {
+        this.invincible = invincible;
     }
 }

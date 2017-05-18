@@ -3,6 +3,7 @@ package com.gamecodeschool.gkg.tappydefender;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.util.Log;
 
 /**
  * Created by exitms21 on 2017-05-16.
@@ -13,6 +14,7 @@ public class CollisionChecker {
     public static boolean isCollisionDetected(Bitmap bitmap1, int x1, int y1,
                                               Bitmap bitmap2, int x2, int y2) {
 
+        Log.i("x1="+x1+" ,y1="+y1,"x2="+x2+" ,y2="+y2);
         Rect bounds1 = new Rect(x1, y1, x1+bitmap1.getWidth(), y1+bitmap1.getHeight());
         Rect bounds2 = new Rect(x2, y2, x2+bitmap2.getWidth(), y2+bitmap2.getHeight());
 
